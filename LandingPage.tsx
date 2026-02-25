@@ -11,16 +11,21 @@ import { ContactUs } from './components/ContactUs';
 import { Footer } from './components/Footer';
 import { RegistrationModal } from './components/RegistrationModal';
 import { LoginModal } from './components/LoginModal';
+import { RecyclerRegistrationModal } from './components/RecyclerRegistrationModal';
 
 export const LandingPage: React.FC = () => {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isRecyclerOpen, setIsRecyclerOpen] = useState(false);
 
   const openRegister = () => setIsRegisterOpen(true);
   const closeRegister = () => setIsRegisterOpen(false);
   
   const openLogin = () => setIsLoginOpen(true);
   const closeLogin = () => setIsLoginOpen(false);
+
+  const openRecycler = () => setIsRecyclerOpen(true);
+  const closeRecycler = () => setIsRecyclerOpen(false);
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans">
@@ -43,7 +48,7 @@ export const LandingPage: React.FC = () => {
         <CaseStudies onRegisterClick={openRegister} />
         
         {/* Section 5: Supply & Demand Market */}
-        <WasteExchange onRegisterClick={openRegister} />
+        <WasteExchange onRegisterClick={openRegister} onRecyclerClick={openRecycler} />
         
         <ContactUs />
       </main>
@@ -51,6 +56,7 @@ export const LandingPage: React.FC = () => {
       <Footer />
       
       <RegistrationModal isOpen={isRegisterOpen} onClose={closeRegister} />
+      <RecyclerRegistrationModal isOpen={isRecyclerOpen} onClose={closeRecycler} />
       <LoginModal isOpen={isLoginOpen} onClose={closeLogin} onRegisterClick={openRegister} />
     </div>
   );

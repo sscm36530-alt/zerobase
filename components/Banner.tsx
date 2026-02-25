@@ -5,24 +5,24 @@ import { BannerSlide } from '../types';
 const slides: BannerSlide[] = [
   {
     id: 1,
-    title: "构建可信碳资产流转基础设施",
+    title: "构建可信碳资产流转平台",
     subtitle: "基于区块链存证与减碳量化标准，实现碳资产确权、转移、入账全流程闭环",
     ctaText: "立即注册",
     bgClass: "from-slate-900 via-indigo-950 to-blue-950" // Deep Tech Background
   },
   {
     id: 2,
-    title: "让减碳成果成为可确权的资产",
-    subtitle: "生产数据实时上链存证 · 减碳量可核算/可认证 · 支持资产转移与合规入账",
+    title: "让生产减碳成果转化为数字资产",
+    subtitle: "生产数据上链存证 · 减碳量可核算/可认证 · 支持资产转移与合规入账",
     ctaText: "查看解决方案",
     // Existing Nature Image
     image: "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=2560&auto=format&fit=crop"
   },
   {
     id: 3,
-    title: "让低碳采购实现合规入账闭环",
+    title: "让绿色采购获得真实减碳成果",
     subtitle: "接收真实减碳量 · 完成转入确认 · 支撑双碳与ESG披露",
-    ctaText: "了解ESG服务",
+    ctaText: "查看解决方案",
     // New ESG/Corporate Compliance Background (Modern Architecture)
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop"
   }

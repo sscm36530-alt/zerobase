@@ -30,9 +30,10 @@ const features = [
 
 export interface WasteExchangeProps {
   onRegisterClick?: () => void;
+  onRecyclerClick?: () => void;
 }
 
-export const WasteExchange: React.FC<WasteExchangeProps> = ({ onRegisterClick }) => {
+export const WasteExchange: React.FC<WasteExchangeProps> = ({ onRegisterClick, onRecyclerClick }) => {
   return (
     <section id="exchange" className="py-24 bg-[#0B1120] relative overflow-hidden font-sans border-t border-white/5 scroll-mt-24">
       <style>{`
@@ -171,7 +172,7 @@ export const WasteExchange: React.FC<WasteExchangeProps> = ({ onRegisterClick })
                           </div>
                       </div>
                       <button 
-                         onClick={onRegisterClick}
+                         onClick={onRecyclerClick}
                          className="w-full shrink-0 group relative overflow-hidden rounded-xl bg-emerald-600 p-[1px] transition-all hover:bg-emerald-500 shadow-md hover:shadow-lg">
                          <div className="relative h-full w-full bg-white rounded-[11px] px-4 py-3 transition-all group-hover:bg-emerald-50">
                             <div className="flex items-center justify-center gap-2">
@@ -246,7 +247,7 @@ export const WasteExchange: React.FC<WasteExchangeProps> = ({ onRegisterClick })
                          className="w-full shrink-0 group relative overflow-hidden rounded-xl bg-blue-600 p-[1px] transition-all hover:bg-blue-500 shadow-md hover:shadow-lg">
                          <div className="relative h-full w-full bg-white rounded-[11px] px-4 py-3 transition-all group-hover:bg-blue-50">
                             <div className="flex items-center justify-center gap-2">
-                               <span className="text-sm font-bold text-blue-700">我是生产工厂</span>
+                               <span className="text-sm font-bold text-blue-700">我是生产企业</span>
                                <ArrowRight size={14} className="text-blue-500 group-hover:translate-x-1 transition-transform" />
                             </div>
                          </div>

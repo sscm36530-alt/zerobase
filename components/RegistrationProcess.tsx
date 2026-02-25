@@ -363,7 +363,7 @@ export const RegistrationProcess: React.FC<RegistrationProcessProps> = ({ onRegi
       {/* 1. All Products Modal (Large Window) */}
       {showAllProducts && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-md transition-opacity" onClick={() => setShowAllProducts(false)}></div>
+          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-md transition-opacity"></div>
           <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-6xl h-[85vh] overflow-hidden animate-in zoom-in-95 duration-300 flex flex-col">
             
             {/* Header - Modified to match Product Detail close button positioning */}
@@ -423,7 +423,7 @@ export const RegistrationProcess: React.FC<RegistrationProcessProps> = ({ onRegi
       {/* 2. Product Detail Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onClick={() => setSelectedProduct(null)}></div>
+          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
           <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-6xl h-[85vh] overflow-hidden animate-in zoom-in-95 duration-300 flex flex-col md:flex-row">
             
             {/* Left: Image Gallery Section - Full Height with Centered Image */}

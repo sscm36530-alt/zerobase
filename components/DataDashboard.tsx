@@ -348,7 +348,7 @@ export const DataDashboard: React.FC = () => {
                 </div>
               </div>
               
-              <div className="relative flex-1 overflow-hidden mask-image-b">
+              <div className="relative h-[120px] overflow-hidden mask-image-b">
                 <div 
                   className="absolute left-0 w-full transition-transform duration-500 ease-in-out will-change-transform"
                   style={{ transform: `translateY(${tickerY}px)` }}
