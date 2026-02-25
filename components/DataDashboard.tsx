@@ -71,25 +71,19 @@ const FallingAtoms: React.FC = () => {
 
     let animationFrameId: number;
     let particles: { x: number; y: number; speed: number; size: number; opacity: number; initialOpacity: number }[] = [];
-
-    const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      initParticles();
-    };
+    let resizeTimeout: NodeJS.Timeout;
 
     const initParticles = () => {
+      if (!canvas) return;
       particles = [];
-      // Optimized density for performance: divisor changed to 6000
-      const particleCount = Math.floor((canvas.width * canvas.height) / 6000); 
+      // Optimized density for performance: divisor changed to 8000 (fewer particles)
+      const particleCount = Math.floor((canvas.width * canvas.height) / 8000); 
       for (let i = 0; i < particleCount; i++) {
-        // Reduced opacity: 0.05 to 0.2 for very subtle effect
         const initialOpacity = 0.05 + Math.random() * 0.15;
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height * 0.5, 
           speed: 0.5 + Math.random() * 1.0, 
-          // Reduced size: 0.5 to 1.5px
           size: 0.5 + Math.random() * 1.0,
           opacity: initialOpacity,
           initialOpacity: initialOpacity
@@ -97,11 +91,24 @@ const FallingAtoms: React.FC = () => {
       }
     };
 
+    const resizeCanvas = () => {
+      if (!canvas) return;
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      initParticles();
+    };
+
+    const onResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resizeCanvas, 200);
+    };
+
     const draw = () => {
+      if (!canvas || !ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      const fadeStart = canvas.height * 0.1; // Start fading at 10% height
-      const fadeEnd = canvas.height * 0.4;   // Completely gone by 40% height
+      const fadeStart = canvas.height * 0.1; 
+      const fadeEnd = canvas.height * 0.4;   
 
       particles.forEach((p) => {
         ctx.beginPath();
@@ -109,21 +116,17 @@ const FallingAtoms: React.FC = () => {
         ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
         ctx.fill();
 
-        // Update position
         p.y += p.speed;
 
-        // Calculate opacity based on position
         if (p.y < fadeStart) {
             p.opacity = p.initialOpacity;
         } else if (p.y >= fadeStart && p.y < fadeEnd) {
-            // Linear fade out
             const progress = (p.y - fadeStart) / (fadeEnd - fadeStart);
             p.opacity = p.initialOpacity * (1 - progress);
         } else {
             p.opacity = 0;
         }
 
-        // Reset if out of bounds (or fully faded)
         if (p.y > fadeEnd) {
           p.y = -10;
           p.x = Math.random() * canvas.width;
@@ -134,13 +137,14 @@ const FallingAtoms: React.FC = () => {
       animationFrameId = requestAnimationFrame(draw);
     };
 
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', onResize);
     resizeCanvas();
     draw();
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('resize', onResize);
       cancelAnimationFrame(animationFrameId);
+      clearTimeout(resizeTimeout);
     };
   }, []);
 
@@ -177,7 +181,7 @@ export const DataDashboard: React.FC = () => {
   };
 
   return (
-    <section id="dashboard" className="relative py-16 text-white overflow-hidden font-sans">
+    <section id="dashboard" className="relative py-16 text-white overflow-hidden font-sans scroll-mt-24">
       
       {/* Background - Dark Gradient */}
       <div className="absolute inset-0 bg-slate-950"></div>
@@ -187,9 +191,9 @@ export const DataDashboard: React.FC = () => {
       {/* Falling Atoms Effect */}
       <FallingAtoms />
 
-      {/* Decorative Elements - Subtle Glows */}
-      <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
-      <div className="absolute bottom-[-20%] left-[-10%] w-[800px] h-[800px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
+      {/* Decorative Elements - Subtle Glows - Added will-change-transform */}
+      <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen will-change-transform"></div>
+      <div className="absolute bottom-[-20%] left-[-10%] w-[800px] h-[800px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen will-change-transform"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -217,8 +221,8 @@ export const DataDashboard: React.FC = () => {
             {/* 6 Stats Cards - Now integrated into the main grid */}
             {platformStats.map((stat, idx) => {
               const currentValue = getCurrentValue(stat.value, idx);
-              // Unified High-End Glass Style
-              const cardStyle = 'bg-white/10 border-white/10 hover:bg-white/20 hover:border-white/20 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)]';
+              // Optimized: Even lighter background for better visibility
+              const cardStyle = 'bg-slate-700/60 border-white/10 hover:bg-slate-600/70 hover:border-white/20 hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)]';
               
               const iconColors = [
                   'text-blue-400 bg-blue-500/10 border-blue-500/20',
@@ -232,7 +236,7 @@ export const DataDashboard: React.FC = () => {
               const iconColor = iconColors[idx % iconColors.length];
 
               return (
-                  <div key={idx} className={`backdrop-blur-md p-6 rounded-2xl border transition-all duration-300 group flex flex-col justify-between h-full min-h-[160px] ${cardStyle}`}>
+                  <div key={idx} className={`p-6 rounded-2xl border transition-all duration-300 group flex flex-col justify-between h-full min-h-[160px] ${cardStyle}`}>
                       <div>
                         <div className="flex justify-between items-start">
                             <div className="text-slate-400 text-sm font-bold leading-relaxed line-clamp-2 pr-2 group-hover:text-slate-200 transition-colors">
@@ -262,7 +266,7 @@ export const DataDashboard: React.FC = () => {
             })}
 
             {/* Map Container - Spans 2 Columns and 2 Rows on Desktop */}
-            <div className="lg:col-span-2 lg:row-span-2 lg:col-start-3 lg:row-start-1 relative bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 p-4 w-full h-full flex flex-col overflow-hidden hover:border-white/20 transition-colors">
+            <div className="lg:col-span-2 lg:row-span-2 lg:col-start-3 lg:row-start-1 relative bg-slate-700/60 rounded-2xl shadow-2xl border border-white/10 p-4 w-full h-full flex flex-col overflow-hidden hover:border-white/20 transition-colors">
               
               {/* Controls Layer */}
               <div className="absolute top-4 left-4 z-20">
@@ -288,13 +292,14 @@ export const DataDashboard: React.FC = () => {
               {/* Centered Map Content */}
               <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-xl">
                   <div className="relative w-full h-full max-h-full aspect-[1.3] flex items-center justify-center">
-                    {/* Replaced Map Image with Blue Theme Filtered Version */}
+                    {/* Optimized Map Image: Removed heavy filter chain, used CSS opacity/blending for performance */}
                     <img 
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/China_administrative_divisions_map_zh-cn.svg/1024px-China_administrative_divisions_map_zh-cn.svg.png" 
                       alt="China Map" 
-                      className="w-full h-full object-contain drop-shadow-xl transform scale-105"
+                      className="w-full h-full object-contain drop-shadow-xl transform scale-105 opacity-60 mix-blend-luminosity"
                       style={{ 
-                        filter: 'invert(1) grayscale(100%) brightness(1.5) contrast(1.2) hue-rotate(180deg) saturate(0.5)' 
+                        // Simplified filter
+                        filter: 'brightness(1.2) contrast(1.1)' 
                       }}
                     />
                     
@@ -335,7 +340,7 @@ export const DataDashboard: React.FC = () => {
             </div>
 
             {/* Real-time Ticker - Spans 2 Columns and 1 Row (3rd row) on Desktop */}
-            <div className="lg:col-span-2 lg:col-start-3 lg:row-start-3 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 p-5 h-full min-h-[160px] flex flex-col relative overflow-hidden w-full transition-all duration-300 hover:border-white/20 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)]">
+            <div className="lg:col-span-2 lg:col-start-3 lg:row-start-3 bg-slate-700/60 rounded-2xl border border-white/10 p-5 h-full min-h-[160px] flex flex-col relative overflow-hidden w-full transition-all duration-300 hover:bg-slate-600/70 hover:border-white/20 hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
               <div className="flex items-center justify-between mb-3 z-10 relative">
                 <span className="text-slate-400 text-sm font-bold leading-relaxed">实时动态</span>
                 <div className="p-2 rounded-xl text-blue-400 bg-blue-500/10 shadow-sm border border-white/5">
@@ -345,7 +350,7 @@ export const DataDashboard: React.FC = () => {
               
               <div className="relative flex-1 overflow-hidden mask-image-b">
                 <div 
-                  className="absolute left-0 w-full transition-transform duration-500 ease-in-out"
+                  className="absolute left-0 w-full transition-transform duration-500 ease-in-out will-change-transform"
                   style={{ transform: `translateY(${tickerY}px)` }}
                 >
                   {[...activityLogs, ...activityLogs].map((log, i) => (

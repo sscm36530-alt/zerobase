@@ -4,8 +4,12 @@ import { ShieldCheck, Zap, Lock, Users } from 'lucide-react';
 const features = [
   {
     id: "01",
-    title: "碳资产量化标准体系",
-    desc: "·依托权威方法学与行业标准\n·由权威机构进行碳足迹评价\n·确保减碳成果可核算、可认证",
+    title: "让减碳成果算得清",
+    desc: [
+      "依托权威方法学与行业标准",
+      "开展减碳量核算与第三方认证",
+      "确保成果真实可靠、可核算、可认证"
+    ],
     icon: ShieldCheck,
     gradient: "from-blue-600 to-indigo-600",
     bgGradient: "from-blue-500/10 to-indigo-500/5",
@@ -13,8 +17,12 @@ const features = [
   },
   {
     id: "02",
-    title: "数字化资产生成",
-    desc: "·企业生产数据实时上链存证\n·自动生成资产编号\n·支持在线确权与转移确认",
+    title: "让减碳成果变成资产",
+    desc: [
+      "生产数据实时存证",
+      "自动生成资产编号",
+      "支持在线确权与转移确认"
+    ],
     icon: Zap,
     gradient: "from-emerald-500 to-teal-500",
     bgGradient: "from-emerald-500/10 to-teal-500/5",
@@ -22,8 +30,12 @@ const features = [
   },
   {
     id: "03",
-    title: "区块链可信存证",
-    desc: "·关键数据实时链上固化\n·形成不可篡改的数字凭证\n·全流程可追溯、可验证",
+    title: "让数据真实可信",
+    desc: [
+      "关键数据链上固化",
+      "全流程可追溯、可验证",
+      "满足审计与披露需求"
+    ],
     icon: Lock,
     gradient: "from-orange-500 to-amber-600",
     bgGradient: "from-orange-500/10 to-amber-500/5",
@@ -31,8 +43,11 @@ const features = [
   },
   {
     id: "04",
-    title: "专业支撑与生态协同",
-    desc: "·碳管理专家与方法学团队支持\n·联合认证机构与行业伙伴\n·提供从量化到入账的全程协同",
+    title: "让落地更简单",
+    desc: [
+      "专业团队与认证机构协同支持",
+      "提供从量化到入账的完整解决路径"
+    ],
     icon: Users,
     gradient: "from-purple-600 to-fuchsia-600",
     bgGradient: "from-purple-500/10 to-fuchsia-500/5",
@@ -42,7 +57,7 @@ const features = [
 
 export const WhyChooseUs: React.FC = () => {
   return (
-    <section id="advantages" className="py-28 bg-slate-50 relative overflow-hidden font-sans">
+    <section id="advantages" className="py-28 bg-slate-50 relative overflow-hidden font-sans scroll-mt-24">
       
       {/* Background Tech Elements */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
@@ -57,12 +72,12 @@ export const WhyChooseUs: React.FC = () => {
           {/* Badge Removed */}
           
           <h2 className="text-4xl md:text-5xl font-normal text-slate-900 tracking-tight mb-8 drop-shadow-sm">
-            为什么选择息壤平台
+            平台核心能力
           </h2>
           <p className="text-slate-600 text-lg font-light leading-snug max-w-3xl mx-auto">
-            构建减碳成果的完整资产闭环，
+            从数据生成到资产入账，
             <br />
-            <span className="mt-1 block">为企业提供可量化、可转移、可披露的碳资产能力。</span>
+            <span className="mt-1 block">构建减碳成果可量化、可确权、可流转的完整闭环。</span>
           </p>
         </div>
 
@@ -71,7 +86,7 @@ export const WhyChooseUs: React.FC = () => {
           {features.map((item, idx) => (
             <div 
               key={idx} 
-              className={`group relative h-full bg-white backdrop-blur-xl p-8 rounded-2xl border transition-all duration-500 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] hover:-translate-y-2 overflow-hidden ${item.border}`}
+              className={`group relative h-full bg-white p-8 rounded-2xl border transition-all duration-500 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] hover:-translate-y-2 overflow-hidden ${item.border}`}
             >
               {/* Inner Gradient Background */}
               <div className={`absolute inset-0 bg-gradient-to-br ${item.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
@@ -97,18 +112,14 @@ export const WhyChooseUs: React.FC = () => {
                   {item.title}
                 </h3>
                 
-                {/* Description Rendering with Bullet Points */}
-                <div className="text-slate-500 leading-7 text-sm font-medium transition-colors space-y-2">
-                  {item.desc.split('\n').map((line, i) => (
-                    <div key={i} className="flex items-start group-hover:text-slate-700 transition-colors">
-                      {line.startsWith('·') ? (
-                          <>
-                            <span className={`mr-2 font-bold text-transparent bg-clip-text bg-gradient-to-r ${item.gradient}`}>•</span>
-                            <span>{line.substring(1)}</span>
-                          </>
-                      ) : (
-                          <span>{line}</span>
-                      )}
+                {/* Description Rendering - List Format with Dots */}
+                <div className="space-y-3">
+                  {item.desc.map((line, i) => (
+                    <div key={i} className="flex items-center gap-2.5 group-hover:translate-x-1 transition-transform duration-300">
+                      <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${item.gradient} shrink-0`} />
+                      <span className="text-slate-500 text-sm font-medium whitespace-nowrap group-hover:text-slate-700 transition-colors">
+                        {line}
+                      </span>
                     </div>
                   ))}
                 </div>

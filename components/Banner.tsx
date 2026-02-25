@@ -63,11 +63,11 @@ export const Banner: React.FC<{ onRegisterClick: () => void }> = ({ onRegisterCl
   };
 
   return (
-    <section className="relative h-[680px] w-full overflow-hidden font-sans bg-slate-900">
+    <section id="home" className="relative h-[680px] w-full overflow-hidden font-sans bg-slate-900">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out will-change-transform ${
             index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
           }`}
         >

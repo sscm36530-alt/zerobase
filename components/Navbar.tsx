@@ -3,13 +3,13 @@ import { Menu, X, Leaf, CheckCircle2 } from 'lucide-react';
 import { NavItem } from '../types';
 
 const navItems: NavItem[] = [
-  { label: '首页', href: '#' },
-  { label: '数据驾驶舱', href: '#dashboard' },
-  { label: '核心优势', href: '#advantages' },
-  { label: '可信基座', href: '#trust' },
-  { label: '认证流程', href: '#process' },
-  { label: '供需对接', href: '#exchange' },
-  { label: '客户案例', href: '#cases' },
+  { label: '首页', href: '#home' },
+  { label: '数字驾驶舱', href: '#dashboard' },
+  { label: '平台能力', href: '#advantages' },
+  { label: '碳资产生成', href: '#process' },
+  { label: '绿色采购与入账', href: '#cases' },
+  { label: '再生资源流通网络', href: '#exchange' },
+  { label: '联系我们', href: '#contact' },
 ];
 
 interface NavbarProps {

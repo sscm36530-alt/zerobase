@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, Send } from 'lucide-react';
 
 export const ContactUs: React.FC = () => {
   return (
-    <section id="contact" className="py-16 bg-slate-100 relative overflow-hidden font-sans">
+    <section id="contact" className="py-16 bg-slate-100 relative overflow-hidden font-sans scroll-mt-24">
       
       {/* Advanced Background: Dot Pattern & Subtle Gradients */}
       <div className="absolute inset-0 pointer-events-none">

@@ -7,13 +7,13 @@ export const Hero: React.FC = () => {
       {/* Background Elements - High Saturation Aurora Effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Main Blue/Purple Aurora */}
-        <div className="absolute -top-[30%] -left-[10%] w-[80%] h-[80%] bg-gradient-to-r from-cyan-300/30 via-blue-400/30 to-purple-400/30 rounded-full blur-[100px] animate-[pulse_8s_ease-in-out_infinite]" />
+        <div className="absolute -top-[30%] -left-[10%] w-[80%] h-[80%] bg-gradient-to-r from-cyan-300/30 via-blue-400/30 to-purple-400/30 rounded-full blur-[100px] animate-[pulse_8s_ease-in-out_infinite] will-change-transform translate-z-0" />
         
         {/* Bright Cyan Spot */}
-        <div className="absolute top-[10%] right-[10%] w-[500px] h-[500px] bg-cyan-400/20 rounded-full blur-[80px] mix-blend-multiply animate-[pulse_6s_ease-in-out_infinite_reverse]" />
+        <div className="absolute top-[10%] right-[10%] w-[500px] h-[500px] bg-cyan-400/20 rounded-full blur-[80px] mix-blend-multiply animate-[pulse_6s_ease-in-out_infinite_reverse] will-change-transform translate-z-0" />
         
         {/* Vivid Pink/Orange Accent for "pop" */}
-        <div className="absolute bottom-[0%] left-[20%] w-[600px] h-[600px] bg-pink-400/20 rounded-full blur-[90px] mix-blend-multiply" />
+        <div className="absolute bottom-[0%] left-[20%] w-[600px] h-[600px] bg-pink-400/20 rounded-full blur-[90px] mix-blend-multiply will-change-transform translate-z-0" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">

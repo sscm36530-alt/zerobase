@@ -46,7 +46,7 @@ interface CaseStudiesProps {
 
 export const CaseStudies: React.FC<CaseStudiesProps> = ({ onRegisterClick }) => {
   return (
-    <section id="cases" className="py-24 bg-gradient-to-b from-purple-50/50 via-white to-blue-50/50 relative overflow-hidden">
+    <section id="cases" className="py-24 bg-gradient-to-b from-purple-50/50 via-white to-blue-50/50 relative overflow-hidden scroll-mt-24">
       
       {/* Background Decor */}
       <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-40"></div>

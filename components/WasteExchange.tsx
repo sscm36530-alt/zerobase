@@ -34,7 +34,7 @@ export interface WasteExchangeProps {
 
 export const WasteExchange: React.FC<WasteExchangeProps> = ({ onRegisterClick }) => {
   return (
-    <section id="exchange" className="py-24 bg-[#0B1120] relative overflow-hidden font-sans border-t border-white/5">
+    <section id="exchange" className="py-24 bg-[#0B1120] relative overflow-hidden font-sans border-t border-white/5 scroll-mt-24">
       <style>{`
         @keyframes scrollY {
           0% { transform: translateY(0); }
@@ -59,8 +59,8 @@ export const WasteExchange: React.FC<WasteExchangeProps> = ({ onRegisterClick })
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] opacity-30"></div>
 
       {/* Nebula Glows */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen animate-pulse duration-[5000ms]"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen animate-pulse duration-[5000ms]"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -69,7 +69,7 @@ export const WasteExchange: React.FC<WasteExchangeProps> = ({ onRegisterClick })
           {/* Left Side: Narrative & Features */}
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl md:text-5xl font-medium text-white mb-8 tracking-tight">
-              再生资源<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-500">供需协同</span>
+              再生资源<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-500">流通网络</span>
             </h2>
             
             <p className="text-slate-400 text-lg mb-10 leading-relaxed font-medium">
@@ -95,7 +95,7 @@ export const WasteExchange: React.FC<WasteExchangeProps> = ({ onRegisterClick })
              {/* Glow Effect */}
              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-blue-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
              
-             <div className="relative bg-[#0F172A]/80 rounded-2xl border border-white/10 overflow-hidden shadow-2xl flex flex-col h-full backdrop-blur-md">
+             <div className="relative bg-[#0F172A] rounded-2xl border border-white/10 overflow-hidden shadow-2xl flex flex-col h-full">
                 
                 {/* Terminal Header */}
                 <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-white/5 shrink-0">
@@ -122,7 +122,7 @@ export const WasteExchange: React.FC<WasteExchangeProps> = ({ onRegisterClick })
                           <div className="h-[240px] overflow-hidden relative">
                              <div className="absolute inset-x-0 top-0 h-6 bg-gradient-to-b from-slate-900/80 to-transparent z-10"></div>
                              <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-slate-900/80 to-transparent z-10"></div>
-                             <div className="animate-scroll-y">
+                             <div className="animate-scroll-y will-change-transform">
                                 <div className="space-y-2 pb-2">
                                 {[
                                   { tag: '供应', title: '废旧纺织品原料', amount: '200吨', loc: '浙江·杭州', time: '25m ago' },
@@ -193,7 +193,7 @@ export const WasteExchange: React.FC<WasteExchangeProps> = ({ onRegisterClick })
                           <div className="h-[240px] overflow-hidden relative">
                              <div className="absolute inset-x-0 top-0 h-6 bg-gradient-to-b from-slate-900/80 to-transparent z-10"></div>
                              <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-slate-900/80 to-transparent z-10"></div>
-                             <div className="animate-scroll-y">
+                             <div className="animate-scroll-y will-change-transform">
                                 <div className="space-y-2 pb-2">
                                 {[
                                   { tag: '求购', title: '再生PET瓶片 (A级)', amount: '500吨', loc: '江苏·苏州', time: '10m ago' },

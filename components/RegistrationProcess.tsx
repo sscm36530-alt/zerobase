@@ -95,43 +95,31 @@ export const RegistrationProcess: React.FC<RegistrationProcessProps> = ({ onRegi
     },
     { 
       id: 4, 
-      name: "再生PET聚酯切片", 
-      company: "江苏******化纤有限公司", 
-      category: "纺织原料", 
-      footprint: "1.08", 
-      image: "https://images.unsplash.com/photo-1605600659908-0ef719419d41?auto=format&fit=crop&q=80&w=800",
-      tagColor: "cyan",
+      name: "固废再生物流托盘", 
+      company: "山东******环保科技有限公司", 
+      category: "", 
+      footprint: "1.25", 
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800",
+      tagColor: "blue",
       date: "2026-03-10",
-      standard: "GRS 4.0",
+      standard: "无废低碳产品评价技术规范 再生塑料托盘-CEC 150-2026",
       verifier: "中环联合(北京)认证中心有限公司",
-      description: "以废旧PET瓶片为原料，经过清洗、熔融、造粒等工序制成。产品粘度稳定，色相好，可用于生产涤纶长丝、短纤、瓶坯等。实现了塑料资源的闭环循环利用。"
+      description: "该产品采用100%回收塑料制成，通过先进的改性技术增强了材料的强度和耐用性。相比传统木质托盘，碳足迹减少了60%以上，且使用寿命延长了3倍。适用于物流运输、仓储周转等场景。",
+      certId: "XR-2026-0891"
     },
     { 
       id: 5, 
-      name: "生物质颗粒燃料", 
-      company: "安徽******新能源有限公司", 
-      category: "清洁能源", 
-      footprint: "0.05", 
-      image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&q=80&w=800",
-      tagColor: "green",
+      name: "废纺再生户外地板", 
+      company: "浙江******节能环保科技有限公司", 
+      category: "绿色建材", 
+      footprint: "2.10", 
+      image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80&w=800",
+      tagColor: "emerald",
       date: "2026-03-10",
-      standard: "NY/T 2909-2016",
+      standard: "PAS 2050:2011",
       verifier: "中环联合(北京)认证中心有限公司",
-      description: "利用农林废弃物（如秸秆、木屑等）压缩成型，具有燃烧效率高、灰分低、清洁环保等特点。可替代煤炭、重油等化石燃料，广泛应用于工业锅炉、民用取暖等领域。"
-    },
-    { 
-      id: 6, 
-      name: "再生铝合金锭", 
-      company: "广东******金属资源有限公司", 
-      category: "金属材料", 
-      footprint: "1.80", 
-      image: "https://images.unsplash.com/photo-1535050804459-066469a98d13?auto=format&fit=crop&q=80&w=800",
-      tagColor: "gray",
-      date: "2026-03-10",
-      standard: "GB/T 8733-2016",
-      verifier: "中环联合(北京)认证中心有限公司",
-      description: "以废铝为原料，经过分选、熔炼、精炼、铸造等工艺制成。产品成分均匀，性能优良，可满足汽车、航空、电子等行业的高标准要求。相比原生铝，节能减排效果显著。"
-    },
+      description: "利用废旧纺织品与再生塑料复合而成，具有防水、防腐、防虫蛀等特性。产品表面纹理自然，触感舒适，广泛应用于公园栈道、庭院露台等户外场所。全生命周期碳排放显著低于传统防腐木。"
+    }
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -139,44 +127,52 @@ export const RegistrationProcess: React.FC<RegistrationProcessProps> = ({ onRegi
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const nextProduct = () => {
-    setActiveIndex((prev) => (prev + 1) % 3); // Only cycle through first 3 for the carousel
+    setActiveIndex((prev) => (prev + 1) % products.length);
   };
 
   const prevProduct = () => {
-    setActiveIndex((prev) => (prev - 1 + 3) % 3);
+    setActiveIndex((prev) => (prev - 1 + products.length) % products.length);
   };
 
-  // Modern 3D Card Style Logic
-  const getCardStyle = (index: number) => {
-    const total = 3; // Only show 3 in carousel
-    // Calculate relative index to center active item
-    let relativeIndex = index - activeIndex;
-    
-    // Handle wrap-around logic for infinite-like feel with 3 items
-    if (relativeIndex > 1) relativeIndex -= total;
-    if (relativeIndex < -1) relativeIndex += total;
-
+  // Optimized 2.5D Card Style Logic
+  const getCardStyle = (relativeIndex: number) => {
     const isActive = relativeIndex === 0;
+    const isNeighbor = Math.abs(relativeIndex) === 1;
+    const isFar = Math.abs(relativeIndex) === 2;
     
-    // 3D Transform Configuration
-    const xOffset = relativeIndex * 65; // Percentage separation
-    const scale = isActive ? 1 : 0.85;
-    const rotateY = isActive ? 0 : -relativeIndex * 25; // Rotate inwards
-    const zIndex = isActive ? 30 : 10;
-    const opacity = isActive ? 1 : 0.5;
-    const blur = isActive ? 0 : 2;
+    // Advanced 2.5D Config - Optimized for performance
+    // Compress spacing for far items
+    const xOffset = relativeIndex * (isFar ? 45 : 55); 
+    const scale = isActive ? 1 : (isFar ? 0.7 : 0.85);
+    // Subtle rotation facing center
+    const rotateY = isActive ? 0 : relativeIndex * -15; 
+    const zIndex = isActive ? 30 : (isFar ? 10 : 20);
+    
+    // Unified logic for non-active cards as requested
+    const opacity = isActive ? 1 : 0.8; 
+    const blur = isActive ? 0 : 3; // Increased blur for non-active cards
+    const brightness = isActive ? 1 : 1.8; // Unified "whiteness"
+    const grayscale = isActive ? 0 : 0.4;
 
     return {
-      transform: `translateX(${xOffset}%) scale(${scale}) perspective(1000px) rotateY(${rotateY}deg)`,
+      // Use translate3d for GPU acceleration and perspective for depth
+      transform: `perspective(1200px) translate3d(${xOffset}%, 0, ${isActive ? 0 : (isFar ? -100 : -50)}px) rotateY(${rotateY}deg) scale(${scale})`,
       zIndex: zIndex,
       opacity: opacity,
-      filter: `blur(${blur}px)`,
-      transition: 'all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)', // Smooth physics-like transition
+      filter: `blur(${blur}px) brightness(${brightness}) grayscale(${grayscale})`,
+      // Smoother, more elastic transition for better "feel"
+      transition: 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)',
+      // Only render heavy shadow on active element
+      boxShadow: isActive ? '0 25px 50px -12px rgba(0, 0, 0, 0.5)' : 'none',
     };
   };
 
+  // Visual slots for the 5-slice effect: -2 (Far Left), -1 (Left), 0 (Center), 1 (Right), 2 (Far Right)
+  // This logic ensures that with 5 products, we show [3, 4, 0, 1, 2] when activeIndex is 0
+  const visualOffsets = [-2, -1, 0, 1, 2];
+
   return (
-    <section id="process" className="py-28 relative overflow-hidden bg-gradient-to-b from-blue-50/80 via-indigo-50/30 to-white font-sans">
+    <section id="process" className="py-28 relative overflow-hidden bg-gradient-to-b from-blue-50/80 via-indigo-50/30 to-white font-sans scroll-mt-24">
       
       {/* Background Texture */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.015)_1px,transparent_1px)] bg-[size:60px_60px] z-0 pointer-events-none"></div>
@@ -199,37 +195,8 @@ export const RegistrationProcess: React.FC<RegistrationProcessProps> = ({ onRegi
           <div className="relative bg-gradient-to-br from-blue-800 to-slate-900 rounded-3xl p-8 md:p-16 overflow-hidden shadow-2xl border border-white/10 group perspective-1000">
             {/* Background Effects */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:30px_30px] opacity-20"></div>
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <svg className="w-full h-full" preserveAspectRatio="none">
-                 <defs>
-                   <radialGradient id="particle-glow" cx="50%" cy="50%" r="50%">
-                     <stop offset="0%" stopColor="white" stopOpacity="0.8"/>
-                     <stop offset="100%" stopColor="transparent" stopOpacity="0"/>
-                   </radialGradient>
-                 </defs>
-                 {[...Array(35)].map((_, i) => (
-                   <circle
-                     key={i}
-                     cx={`${Math.random() * 100}%`}
-                     cy={`${Math.random() * 100}%`}
-                     r={Math.random() * 3 + 1}
-                     fill="url(#particle-glow)"
-                     className="animate-pulse"
-                     opacity={Math.random() * 0.6 + 0.1}
-                   >
-                     <animate
-                       attributeName="cy"
-                       from="110%"
-                       to="-10%"
-                       dur={`${10 + Math.random() * 25}s`}
-                       repeatCount="indefinite"
-                       begin={`-${Math.random() * 20}s`}
-                     />
-                   </circle>
-                 ))}
-              </svg>
-            </div>
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[100px] animate-pulse duration-[5000ms] pointer-events-none mix-blend-screen"></div>
+            {/* Removed heavy SVG animation for performance */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[60px] animate-pulse duration-[5000ms] pointer-events-none mix-blend-screen"></div>
 
             {/* Connecting Line */}
             <div className="hidden md:block absolute top-32 left-[10%] right-[10%] h-[2px] bg-white/5 z-0 transform -translate-y-1/2 rounded-full overflow-hidden">
@@ -282,7 +249,7 @@ export const RegistrationProcess: React.FC<RegistrationProcessProps> = ({ onRegi
           <div className="relative max-w-7xl mx-auto h-[500px] flex items-center justify-center">
             
             {/* Center Glow Effect behind Active Card */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-blue-200/30 to-cyan-200/30 rounded-full blur-[120px] pointer-events-none z-0"></div>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-blue-200/30 to-cyan-200/30 rounded-full blur-[80px] pointer-events-none z-0"></div>
 
             {/* Navigation Controls */}
             <button 
@@ -301,15 +268,26 @@ export const RegistrationProcess: React.FC<RegistrationProcessProps> = ({ onRegi
             {/* The Stage */}
             <div className="relative w-full h-full flex items-center justify-center">
               
-              {products.slice(0, 3).map((product, index) => {
-                const style = getCardStyle(index);
+              {visualOffsets.map((offset) => {
+                // Calculate which product to show in this slot
+                // We add products.length * 10 to ensure the dividend is positive before modulo
+                const productIndex = (activeIndex + offset + products.length * 10) % products.length;
+                const product = products[productIndex];
+                const style = getCardStyle(offset);
                 
                 return (
                   <div 
-                    key={product.id} 
-                    onClick={() => setSelectedProduct(product)}
+                    key={`${product.id}-${offset}`} // Unique key for each slot position
+                    onClick={() => {
+                      if (offset === 0) {
+                        setSelectedProduct(product);
+                      } else {
+                        const newIndex = (activeIndex + offset + products.length) % products.length;
+                        setActiveIndex(newIndex);
+                      }
+                    }}
                     style={style}
-                    className="absolute w-[340px] md:w-[500px] h-[255px] md:h-[375px] rounded-2xl bg-slate-200 shadow-2xl overflow-hidden cursor-pointer will-change-transform border border-slate-100/50"
+                    className="absolute w-[340px] md:w-[500px] h-[255px] md:h-[375px] rounded-2xl bg-slate-200 overflow-hidden cursor-pointer will-change-transform border border-slate-100/50"
                   >
                     {/* Full Height Image with Gradient Overlay */}
                     <div className="absolute inset-0 h-full w-full">
@@ -357,13 +335,13 @@ export const RegistrationProcess: React.FC<RegistrationProcessProps> = ({ onRegi
             </div>
           </div>
           
-          {/* Pagination Dots */}
+          {/* Pagination Dots - Fixed to 5 dots */}
           <div className="flex justify-center gap-2 mt-8">
-            {products.slice(0, 3).map((_, idx) => (
+            {[0, 1, 2, 3, 4].map((idx) => (
               <button 
                 key={idx}
                 onClick={() => setActiveIndex(idx)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${activeIndex === idx ? 'w-8 bg-blue-600' : 'w-2 bg-slate-300 hover:bg-blue-400'}`}
+                className={`h-1.5 rounded-full transition-all duration-500 ease-out ${activeIndex === idx ? 'w-8 bg-blue-600 shadow-blue-200 shadow-md' : 'w-2 bg-slate-300 hover:bg-blue-400 hover:scale-125'}`}
               />
             ))}
           </div>
