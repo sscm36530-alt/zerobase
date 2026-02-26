@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Banner } from './components/Banner';
+import { GlobeSection } from './components/GlobeSection';
 import { DataDashboard } from './components/DataDashboard';
 import { WhyChooseUs } from './components/WhyChooseUs';
 import { TrustedInfrastructure } from './components/TrustedInfrastructure';
@@ -33,6 +34,7 @@ export const LandingPage: React.FC = () => {
       
       <main className="flex-grow">
         <Banner onRegisterClick={openRegister} />
+        <GlobeSection />
         <DataDashboard />
         
         {/* Section 1: Value Prop */}

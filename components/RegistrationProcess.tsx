@@ -174,8 +174,8 @@ export const RegistrationProcess: React.FC<RegistrationProcessProps> = ({ onRegi
   return (
     <section id="process" className="py-28 relative overflow-hidden bg-gradient-to-b from-blue-50/80 via-indigo-50/30 to-white font-sans scroll-mt-24">
       
-      {/* Background Texture */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.015)_1px,transparent_1px)] bg-[size:60px_60px] z-0 pointer-events-none"></div>
+      {/* Background Texture - Dot Matrix Style (Matching TrustedInfrastructure) */}
+      <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -192,17 +192,21 @@ export const RegistrationProcess: React.FC<RegistrationProcessProps> = ({ onRegi
           </div>
 
           {/* Unified Panel */}
-          <div className="relative bg-gradient-to-br from-blue-800 to-slate-900 rounded-3xl p-8 md:p-16 overflow-hidden shadow-2xl border border-white/10 group perspective-1000">
+          <div className="relative bg-gradient-to-br from-blue-950 via-indigo-900 to-slate-900 bg-[length:400%_400%] animate-[gradientMove_8s_ease_infinite] rounded-2xl p-8 md:p-16 overflow-hidden shadow-2xl border border-white/10 group perspective-1000">
+            <style>{`
+              @keyframes gradientMove {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+              }
+            `}</style>
+
             {/* Background Effects */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:30px_30px] opacity-20"></div>
             {/* Removed heavy SVG animation for performance */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[60px] animate-pulse duration-[5000ms] pointer-events-none mix-blend-screen"></div>
 
-            {/* Connecting Line */}
-            <div className="hidden md:block absolute top-32 left-[10%] right-[10%] h-[2px] bg-white/5 z-0 transform -translate-y-1/2 rounded-full overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/40 to-transparent w-full animate-[shimmer_3s_infinite_linear]"></div>
-                <div className="absolute top-0 bottom-0 w-32 bg-gradient-to-r from-transparent via-cyan-400 to-transparent blur-[4px] animate-[shimmer_2s_infinite_linear] opacity-90"></div>
-            </div>
+            {/* Connecting Line Removed */}
             
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10 mt-8">
               {steps.map((step, idx) => (
@@ -218,7 +222,7 @@ export const RegistrationProcess: React.FC<RegistrationProcessProps> = ({ onRegi
                       <h3 className="text-xl font-bold text-white mb-2 tracking-wide group-hover/step:text-cyan-300 transition-colors">
                           {step.title}
                       </h3>
-                      <p className="text-sm text-slate-400 font-medium leading-relaxed group-hover/step:text-slate-300 transition-colors whitespace-pre-line">
+                      <p className="text-sm text-blue-100/80 font-medium leading-relaxed group-hover/step:text-white transition-colors whitespace-pre-line">
                           {step.desc}
                       </p>
                   </div>

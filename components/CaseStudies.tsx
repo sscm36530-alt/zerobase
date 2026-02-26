@@ -1,11 +1,11 @@
 import React from 'react';
-import { Leaf, ArrowRight, Building2, Package } from 'lucide-react';
+import { Leaf, ArrowRight, Building2, Package, Anchor } from 'lucide-react';
 
 const cases = [
   {
     id: 1,
     company: "全球知名餐饮连锁品牌 M",
-    industry: "公共空间",
+    industry: "商业连锁",
     summary: "采购已认证固纺户外地板，\n替代原生木质户外地板。\n\n系统自动核算对应减碳量，\n并完成链上资产转入确认。",
     tag: "固纺再生",
     icon: Building2,
@@ -23,7 +23,7 @@ const cases = [
     icon: Leaf,
     reductionValue: "12,400",
     reductionUnit: "tCO₂e",
-    color: "purple",
+    color: "emerald",
     assetStatus: ["已确权", "可披露", "可入账"]
   },
   {
@@ -32,10 +32,10 @@ const cases = [
     industry: "港口物流",
     summary: "采购已认证固纺物流托盘，\n替代原生塑料托盘。\n\n系统完成减碳量接收与资产登记。",
     tag: "固纺再生",
-    icon: Package,
+    icon: Anchor,
     reductionValue: "5,600",
     reductionUnit: "tCO₂e",
-    color: "pink",
+    color: "cyan",
     assetStatus: ["已确权", "可披露", "可入账"]
   }
 ];
@@ -66,64 +66,57 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ onRegisterClick }) => 
           </p>
         </div>
 
-        {/* Cards Grid - Light Cards with Premium Shadow */}
+        {/* Cards Grid - Minimalist High-End Style (Preserved) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {cases.map((item) => (
-            <div key={item.id} className={`group relative bg-white/80 backdrop-blur-xl rounded-2xl p-8 shadow-xl hover:shadow-[0_20px_50px_-12px_rgba(124,58,237,0.15)] transition-all duration-500 flex flex-col h-full overflow-hidden hover:-translate-y-2 border border-white/60 ring-1 ring-slate-100 hover:ring-${item.color}-400`}>
+            <div key={item.id} className="group relative bg-gradient-to-b from-white to-blue-50/30 rounded-2xl p-8 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-12px_rgba(59,130,246,0.15)] transition-all duration-500 flex flex-col h-full border border-blue-100/60 hover:border-blue-200">
               
-              {/* Top Accent Line */}
-              <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-${item.color}-400 to-${item.color}-600 opacity-0 group-hover:opacity-100 transition-opacity`}></div>
+              {/* Subtle Top Gradient Line - Unified Blue, Thicker on Hover */}
+              <div className="absolute top-0 left-6 right-6 h-[3px] bg-gradient-to-r from-transparent via-blue-600 to-transparent opacity-30 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-              {/* Decorative Watermark */}
-              <div className={`absolute -bottom-8 -right-8 text-${item.color}-50 group-hover:text-${item.color}-100 transition-colors duration-500 rotate-12`}>
-                <item.icon size={160} strokeWidth={1} />
-              </div>
-
-              {/* Tag */}
-              <div className="relative z-10 flex justify-between items-start mb-6">
-                 <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white shadow-sm text-slate-500 text-[10px] font-bold tracking-wider border border-slate-100 uppercase group-hover:bg-${item.color}-500 group-hover:text-white group-hover:border-${item.color}-500 transition-all`}>
+              {/* Header: Tag & Icon */}
+              <div className="flex justify-between items-start mb-6">
+                 <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-blue-50/50 text-slate-500 text-xs font-medium tracking-wide border border-blue-100/50 group-hover:bg-blue-50 group-hover:text-blue-600 group-hover:border-blue-100 transition-colors">
                     {item.industry}
                  </span>
+                 <div className="p-2 rounded-lg bg-blue-50/30 text-slate-400 group-hover:text-blue-600 group-hover:bg-blue-50 transition-colors duration-300">
+                    <item.icon size={22} strokeWidth={1.5} />
+                 </div>
               </div>
 
               {/* Content */}
-              <div className="relative z-10 flex-grow">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug">
+              <div className="flex-grow">
+                <h3 className="text-xl font-bold text-slate-900 mb-4 leading-snug group-hover:text-blue-700 transition-colors">
                   {item.company}
                 </h3>
-                <p className="text-slate-500 text-sm leading-relaxed mb-8 whitespace-pre-line">
+                <p className="text-slate-500 text-[15px] leading-7 mb-8 whitespace-pre-line font-light">
                   {item.summary}
                 </p>
               </div>
               
-              {/* Metric */}
-              <div className="relative z-10 mt-auto pt-6 border-t border-slate-100">
+              {/* Metric Section - Clean & Big */}
+              <div className="mt-auto pt-6 border-t border-slate-50 group-hover:border-slate-100 transition-colors">
                 <div className="flex flex-col">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                    <Leaf size={12} className={`text-${item.color}-500`} /> 获得减碳量
+                  <span className="text-xs font-medium text-slate-400 uppercase tracking-widest mb-2">
+                    获得减碳量
                   </span>
-                  <div className="flex items-baseline gap-2 mb-4">
-                    <span className={`text-5xl font-black text-slate-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-${item.color}-600 group-hover:to-${item.color}-400 transition-all duration-300 tabular-nums tracking-tight`}>
+                  <div className="flex items-baseline gap-1.5 mb-5">
+                    <span className="text-4xl font-medium text-slate-900 tracking-tight tabular-nums group-hover:text-blue-700 transition-colors">
                       {item.reductionValue}
                     </span>
-                    <span className="text-sm font-bold text-slate-400">
+                    <span className="text-sm font-medium text-slate-400">
                       {item.reductionUnit}
                     </span>
                   </div>
                   
-                  {/* Asset Status for Brand M */}
-                  {item.assetStatus && (
-                    <div className="mt-2">
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 block">资产状态</span>
-                      <div className="flex gap-2">
-                        {item.assetStatus.map((status, idx) => (
-                          <span key={idx} className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded border border-emerald-100">
-                            {status}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  {/* Asset Status Tags - Minimalist */}
+                  <div className="flex flex-wrap gap-2">
+                    {item.assetStatus.map((status, idx) => (
+                      <span key={idx} className="text-xs font-medium text-slate-500 bg-slate-50 px-2.5 py-1 rounded border border-slate-100 group-hover:border-blue-100 group-hover:text-blue-600 group-hover:bg-blue-50/50 transition-all">
+                        {status}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -131,7 +124,7 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ onRegisterClick }) => 
           ))}
         </div>
 
-        {/* Purchaser Banner - Deep Blue Gradient (Matching Registration Process) */}
+        {/* Purchaser Banner - Deep Blue Gradient (Reverted to Previous Version) */}
         <div className="mt-8 relative bg-gradient-to-br from-blue-800 to-slate-900 rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_20px_50px_-12px_rgba(124,58,237,0.15)] transition-all duration-500 group border border-white/10">
            
            {/* --- Dynamic Background Effects (Ported from RegistrationProcess) --- */}
