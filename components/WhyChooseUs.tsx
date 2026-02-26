@@ -47,7 +47,7 @@ export const WhyChooseUs: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-6">
+          <h2 className="text-4xl md:text-5xl font-medium text-slate-900 tracking-tight mb-6">
             平台核心能力
           </h2>
           <p className="text-slate-500 text-lg font-normal leading-relaxed">
@@ -60,33 +60,32 @@ export const WhyChooseUs: React.FC = () => {
           {features.map((item, idx) => (
             <div 
               key={idx} 
-              className="group relative bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 flex flex-col overflow-hidden"
+              className="group relative bg-gradient-to-b from-white to-blue-50/30 rounded-2xl p-8 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-12px_rgba(59,130,246,0.15)] transition-all duration-500 flex flex-col h-full border border-blue-100/60 hover:border-blue-200 overflow-hidden"
             >
-              {/* Tech Accent Line - Always Visible */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+              {/* Subtle Top Gradient Line - Unified Blue, Thicker on Hover */}
+              <div className="absolute top-0 left-6 right-6 h-[3px] bg-gradient-to-r from-transparent via-blue-600 to-transparent opacity-30 group-hover:opacity-100 transition-opacity duration-500"></div>
               
-              {/* Icon - Tech Color by Default */}
-              <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-cyan-50 border border-cyan-100 text-cyan-600 group-hover:bg-cyan-100 group-hover:scale-110 transition-all duration-300 shadow-sm">
-                <item.icon size={24} strokeWidth={1.5} />
+              {/* Icon */}
+              <div className="mb-6">
+                 <div className="inline-flex p-2 rounded-lg bg-blue-50/30 text-slate-400 group-hover:text-blue-600 group-hover:bg-blue-50 transition-colors duration-300">
+                    <item.icon size={24} strokeWidth={1.5} />
+                 </div>
               </div>
               
               {/* Title */}
-              <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-cyan-700 transition-colors duration-300">
+              <h3 className="text-xl font-bold text-slate-900 mb-4 leading-snug group-hover:text-blue-700 transition-colors">
                 {item.title}
               </h3>
               
               {/* Description List */}
               <ul className="space-y-3 mt-auto">
                 {item.desc.map((line, i) => (
-                  <li key={i} className="flex items-center gap-3 text-slate-600 text-sm leading-relaxed whitespace-nowrap">
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
+                  <li key={i} className="flex items-center gap-3 text-slate-500 text-[15px] leading-7 font-light">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" />
                     {line}
                   </li>
                 ))}
               </ul>
-
-              {/* Subtle Tech Background Pattern */}
-              <div className="absolute right-0 bottom-0 w-24 h-24 bg-gradient-to-tl from-cyan-50/50 to-transparent rounded-tl-full -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
             </div>
           ))}
         </div>

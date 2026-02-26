@@ -285,7 +285,7 @@ export const GlobeSection: React.FC = () => {
           </div>
 
         {/* Carbon Asset Cockpit & Province Selector Container */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-7xl px-4 pb-0 z-40 pointer-events-none">
+        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 w-full max-w-7xl px-4 pb-0 z-40 pointer-events-none">
           {/* Main Card Wrapper - Handles Shape & Shadow */}
           <div className="relative pointer-events-auto bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl border border-slate-200 overflow-hidden transition-all duration-300">
             

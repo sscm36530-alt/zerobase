@@ -186,7 +186,7 @@ export const RegistrationProcess: React.FC<RegistrationProcessProps> = ({ onRegi
               再生资源工厂的<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">碳价值转化引擎</span>
             </h2>
             <p className="text-slate-500 text-lg font-light leading-relaxed max-w-3xl mx-auto tracking-wide">
-              让每一吨固废再利用都转化为可确权、可计量、可流转的碳资产
+              让每一吨固废再利用，都转化为可确权、可计量、可流转的碳资产
               <br className="hidden md:block"/>实现环保行为与经济价值的直接连接。
             </p>
           </div>
